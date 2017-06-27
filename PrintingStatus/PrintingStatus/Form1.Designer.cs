@@ -31,17 +31,17 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tpDashboard = new System.Windows.Forms.TabPage();
+            this.lbPrintLogToday = new System.Windows.Forms.Label();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.tpLog = new System.Windows.Forms.TabPage();
+            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.lbLog_Printers = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.tpPrinters = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.printLogBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.printersDataSet = new PrintingStatus.PrintersDataSet();
-            this.tpReports = new System.Windows.Forms.TabPage();
-            this.printLogTableAdapter = new PrintingStatus.PrintersDataSetTableAdapters.PrintLogTableAdapter();
             this.printerNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dateTimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.blackA4DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -52,22 +52,22 @@
             this.coloredtotalDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.duplexPagesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.totalPriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.lbPrintLogToday = new System.Windows.Forms.Label();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.lbLog_Printers = new System.Windows.Forms.Label();
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.printLogBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.printersDataSet = new PrintingStatus.PrintersDataSet();
+            this.tpReports = new System.Windows.Forms.TabPage();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.button2 = new System.Windows.Forms.Button();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.printLogTableAdapter = new PrintingStatus.PrintersDataSetTableAdapters.PrintLogTableAdapter();
             this.tabControl.SuspendLayout();
             this.tpDashboard.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.tpLog.SuspendLayout();
             this.tpPrinters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.printLogBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.printersDataSet)).BeginInit();
             this.tpReports.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
             this.SuspendLayout();
             // 
@@ -95,6 +95,23 @@
             this.tpDashboard.Text = "Dashboard";
             this.tpDashboard.UseVisualStyleBackColor = true;
             // 
+            // lbPrintLogToday
+            // 
+            this.lbPrintLogToday.AutoSize = true;
+            this.lbPrintLogToday.Location = new System.Drawing.Point(25, 11);
+            this.lbPrintLogToday.Name = "lbPrintLogToday";
+            this.lbPrintLogToday.Size = new System.Drawing.Size(92, 13);
+            this.lbPrintLogToday.TabIndex = 1;
+            this.lbPrintLogToday.Text = "Files printed today";
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Location = new System.Drawing.Point(25, 30);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.Size = new System.Drawing.Size(240, 201);
+            this.dataGridView2.TabIndex = 0;
+            // 
             // tpLog
             // 
             this.tpLog.Controls.Add(this.checkedListBox1);
@@ -111,6 +128,25 @@
             this.tpLog.Text = "Log";
             this.tpLog.UseVisualStyleBackColor = true;
             // 
+            // checkedListBox1
+            // 
+            this.checkedListBox1.FormattingEnabled = true;
+            this.checkedListBox1.Items.AddRange(new object[] {
+            "All printers"});
+            this.checkedListBox1.Location = new System.Drawing.Point(158, 52);
+            this.checkedListBox1.Name = "checkedListBox1";
+            this.checkedListBox1.Size = new System.Drawing.Size(120, 94);
+            this.checkedListBox1.TabIndex = 8;
+            // 
+            // lbLog_Printers
+            // 
+            this.lbLog_Printers.AutoSize = true;
+            this.lbLog_Printers.Location = new System.Drawing.Point(155, 14);
+            this.lbLog_Printers.Name = "lbLog_Printers";
+            this.lbLog_Printers.Size = new System.Drawing.Size(74, 13);
+            this.lbLog_Printers.TabIndex = 7;
+            this.lbLog_Printers.Text = "Select printers";
+            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(312, 54);
@@ -119,7 +155,6 @@
             this.button1.TabIndex = 6;
             this.button1.Text = "Show";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // listBox1
             // 
@@ -181,33 +216,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(393, 302);
             this.dataGridView1.TabIndex = 0;
             // 
-            // printLogBindingSource
-            // 
-            this.printLogBindingSource.DataMember = "PrintLog";
-            this.printLogBindingSource.DataSource = this.printersDataSet;
-            // 
-            // printersDataSet
-            // 
-            this.printersDataSet.DataSetName = "PrintersDataSet";
-            this.printersDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // tpReports
-            // 
-            this.tpReports.Controls.Add(this.dataGridView3);
-            this.tpReports.Controls.Add(this.button2);
-            this.tpReports.Controls.Add(this.comboBox3);
-            this.tpReports.Location = new System.Drawing.Point(4, 22);
-            this.tpReports.Name = "tpReports";
-            this.tpReports.Padding = new System.Windows.Forms.Padding(3);
-            this.tpReports.Size = new System.Drawing.Size(405, 439);
-            this.tpReports.TabIndex = 3;
-            this.tpReports.Text = "Reports";
-            this.tpReports.UseVisualStyleBackColor = true;
-            // 
-            // printLogTableAdapter
-            // 
-            this.printLogTableAdapter.ClearBeforeFill = true;
-            // 
             // printerNameDataGridViewTextBoxColumn
             // 
             this.printerNameDataGridViewTextBoxColumn.DataPropertyName = "Printer name";
@@ -268,22 +276,45 @@
             this.totalPriceDataGridViewTextBoxColumn.HeaderText = "Total price";
             this.totalPriceDataGridViewTextBoxColumn.Name = "totalPriceDataGridViewTextBoxColumn";
             // 
-            // dataGridView2
+            // printLogBindingSource
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(25, 30);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(240, 98);
-            this.dataGridView2.TabIndex = 0;
+            this.printLogBindingSource.DataMember = "PrintLog";
+            this.printLogBindingSource.DataSource = this.printersDataSet;
             // 
-            // lbPrintLogToday
+            // printersDataSet
             // 
-            this.lbPrintLogToday.AutoSize = true;
-            this.lbPrintLogToday.Location = new System.Drawing.Point(25, 11);
-            this.lbPrintLogToday.Name = "lbPrintLogToday";
-            this.lbPrintLogToday.Size = new System.Drawing.Size(92, 13);
-            this.lbPrintLogToday.TabIndex = 1;
-            this.lbPrintLogToday.Text = "Files printed today";
+            this.printersDataSet.DataSetName = "PrintersDataSet";
+            this.printersDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // tpReports
+            // 
+            this.tpReports.Controls.Add(this.dataGridView3);
+            this.tpReports.Controls.Add(this.button2);
+            this.tpReports.Controls.Add(this.comboBox3);
+            this.tpReports.Location = new System.Drawing.Point(4, 22);
+            this.tpReports.Name = "tpReports";
+            this.tpReports.Padding = new System.Windows.Forms.Padding(3);
+            this.tpReports.Size = new System.Drawing.Size(405, 439);
+            this.tpReports.TabIndex = 3;
+            this.tpReports.Text = "Reports";
+            this.tpReports.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView3
+            // 
+            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView3.Location = new System.Drawing.Point(19, 137);
+            this.dataGridView3.Name = "dataGridView3";
+            this.dataGridView3.Size = new System.Drawing.Size(366, 263);
+            this.dataGridView3.TabIndex = 2;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(271, 16);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(114, 23);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "Show report";
+            this.button2.UseVisualStyleBackColor = true;
             // 
             // comboBox3
             // 
@@ -295,41 +326,9 @@
             this.comboBox3.Size = new System.Drawing.Size(121, 21);
             this.comboBox3.TabIndex = 0;
             // 
-            // lbLog_Printers
+            // printLogTableAdapter
             // 
-            this.lbLog_Printers.AutoSize = true;
-            this.lbLog_Printers.Location = new System.Drawing.Point(155, 14);
-            this.lbLog_Printers.Name = "lbLog_Printers";
-            this.lbLog_Printers.Size = new System.Drawing.Size(74, 13);
-            this.lbLog_Printers.TabIndex = 7;
-            this.lbLog_Printers.Text = "Select printers";
-            // 
-            // checkedListBox1
-            // 
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Items.AddRange(new object[] {
-            "All printers"});
-            this.checkedListBox1.Location = new System.Drawing.Point(158, 52);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(120, 94);
-            this.checkedListBox1.TabIndex = 8;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(271, 16);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(114, 23);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Show report";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // dataGridView3
-            // 
-            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Location = new System.Drawing.Point(19, 137);
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.Size = new System.Drawing.Size(366, 263);
-            this.dataGridView3.TabIndex = 2;
+            this.printLogTableAdapter.ClearBeforeFill = true;
             // 
             // Form1
             // 
@@ -344,6 +343,7 @@
             this.tabControl.ResumeLayout(false);
             this.tpDashboard.ResumeLayout(false);
             this.tpDashboard.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.tpLog.ResumeLayout(false);
             this.tpLog.PerformLayout();
             this.tpPrinters.ResumeLayout(false);
@@ -351,7 +351,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.printLogBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.printersDataSet)).EndInit();
             this.tpReports.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
             this.ResumeLayout(false);
 

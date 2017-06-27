@@ -13,43 +13,58 @@ using System.Data.SqlClient;
 
 namespace PrintingStatus
 {
+    public enum PrinterState
+    {
+        Other,
+        Unknown,
+        Idle,
+        Printing,
+        Warmup,
+        Stopped,
+        Offline
+    }
+    public class Printer
+    {
+        string name;
+        PrinterState state;
+
+        public Printer() { }
+        public Printer(string name = "", PrinterState state = PrinterState.Unknown)
+        {
+            this.name = name;
+            this.state = state;
+        }
+    }
     public partial class Form1 : Form
     {
+        List<Printer> printers = new List<Printer>();
         public Form1()
         {
             InitializeComponent();
             WaitForTime();
-            PullData();
-        /*   int ActivePrintersCount = 0;
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_Printer");
-            foreach (ManagementObject printer in searcher.Get())
-            {
-        if (printer["Availability"].ToString() == "true")
-                    ActivePrintersCount++;
-            }
-            ManagementObject[] printers = new ManagementObject[ActivePrintersCount];
-            int j = 0;
-            foreach (ManagementObject printer in searcher.Get())
-            {
-                try
-                {
-                    MessageBox.Show(printer["Availability"].ToString());
-                    if (printer["Availability"].ToString() == "true")
-                    {
-                        printers[j] = printer;
-                        j++;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-            }*/
+            //PullData();
+            //getPrinters();
+            
         }
-
         // your data table
-        private DataTable dataTable = new DataTable();
+       /* private DataTable dataTable = new DataTable();
 
+        public void getPrinters()
+        {
+            ManagementObjectSearcher searcher =
+                new ManagementObjectSearcher("SELECT * FROM Win32_Printer");
+
+            foreach (ManagementObject printer in searcher.Get())
+            {
+                string printerName = printer["Name"].ToString();
+                printers.Add(new Printer(printerName, (PrinterState)printer["PrinterStatus"]));
+            }
+            Printer[] printersArray = printers.ToArray();
+            foreach ()
+            {
+
+            } 
+        }
         // your method to pull data from database to datatable   
         public void PullData()
         {
@@ -64,7 +79,7 @@ namespace PrintingStatus
 
             connection.Close();
         }
-
+        */
         
         private async void WaitForTime()
         {
@@ -81,9 +96,9 @@ namespace PrintingStatus
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'printersDataSet.PrintLog' table. You can move, or remove it, as needed.
+          /*  // TODO: This line of code loads data into the 'printersDataSet.PrintLog' table. You can move, or remove it, as needed.
             this.printLogTableAdapter.Fill(this.printersDataSet.PrintLog);
-
+            */
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
@@ -91,7 +106,7 @@ namespace PrintingStatus
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        /*private void button1_Click(object sender, EventArgs e)
         {
             if (comboBox1.SelectedIndex == -1 && comboBox2.SelectedIndex == -1)
                 MessageBox.Show("Please select how many and which available printers you'd like to see.");
@@ -104,7 +119,7 @@ namespace PrintingStatus
 
             }
 
-        }
+        }*/
 
     }
 }
