@@ -12,7 +12,7 @@ using System.Management;
 using System.Data.SqlClient;
 using MySql.Data.MySqlClient;
 using PrintingStatus.Properties;
-
+using System.IO;
 
 namespace PrintingStatus
 {
@@ -21,8 +21,8 @@ namespace PrintingStatus
         public int printers, recentErrors, recentWarnings, totalPages, pagesToday, holdReleaseJobs;
         public string current_state;
         public Form1()
-        {   
-            printers = recentErrors = recentWarnings =  holdReleaseJobs = 0;
+        {
+            printers = recentErrors = recentWarnings = holdReleaseJobs = 0;
             InitializeComponent();
             pictureBox1.Image = Resources.dashboard;
             pictureBox2.Image = Resources.log;
@@ -31,8 +31,6 @@ namespace PrintingStatus
             tabControl.Appearance = TabAppearance.FlatButtons;
             tabControl.ItemSize = new Size(0, 1);
             tabControl.SizeMode = TabSizeMode.Fixed;
-            btnPrices.Visible = false;
-
 
             SetLabels();
             WaitForTime();
@@ -56,89 +54,30 @@ namespace PrintingStatus
                 this.dgvPrinterStatus.Rows.Add(printer["Name"].ToString(), current_state);
 
                 if (status.Trim() != "2" && status.Trim() != "7")
-                { 
+                {
                     clbPrinters.Items.Add(printer["Name"].ToString());
                     comboBox3.Items.Add(printer["Name"].ToString());
                     printers++;
                 }
-                SetLabels();
-             /*   if (dataGridView2.Rows.Count == 0)
-                {
-                    lbPrintLogToday.Text = "No files have been printed today.";
-                    dataGridView2.Visible = false;
-                }*/
-
-                   
-             //   MessageBox.Show("Name: "+printer["Name"].ToString()+"\nStatus: "+status.Trim());
-                //  MessageBox.Show("Status: "+printer["Status"].ToString());
             }
-
-            //PullData();
-            /*   int ActivePrintersCount = 0;
-                ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_Printer");
-                foreach (ManagementObject printer in searcher.Get())
-                {
-            if (printer["Availability"].ToString() == "true")
-                        ActivePrintersCount++;
-                }
-                ManagementObject[] printers = new ManagementObject[ActivePrintersCount];
-                int j = 0;
-                foreach (ManagementObject printer in searcher.Get())
-                {
-                    try
-                    {
-                        MessageBox.Show(printer["Availability"].ToString());
-                        if (printer["Availability"].ToString() == "true")
-                        {
-                            printers[j] = printer;
-                            j++;
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                }*/
+            SetLabels();
         }
-
-        // your data table
         private DataTable dataTable = new DataTable();
-
-        // your method to pull data from database to datatable   
+ 
         public void PullData()
         {
-            //string connString = @"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = C:\Users\lukaz\Documents\Printers.mdf; Integrated Security = True; Connect Timeout = 30";
-
-            //SqlConnection connection = new SqlConnection(connString);
-            //SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM PrintLog",connection);
-
-            //DataTable dt = new DataTable();
-
-            //adapter.Fill(dt);
-
-            //connection.Close();
 
             try
-            {//sg2plcpnl0257.prod.sin2.secureserver.net
+            {
                 MySqlConnection con1 = new MySqlConnection("Server=sg2plcpnl0257.prod.sin2.secureserver.net; Port=3306; Database=newdataase123; Uid=newdbuser; Pwd=5core123;");
                 con1.Open();
                 MessageBox.Show("Connection established");
-                //string query = "INSERT INTO TestTable VALUES(1,'myname','myusername','mypass')";
-                //MySqlCommand cmd = new MySqlCommand(query, con1);
-                //cmd.ExecuteNonQuery();
                 con1.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-
-
-
-           
-
-
-
         }
 
         public void SetLabels()
@@ -150,11 +89,6 @@ namespace PrintingStatus
             lbPagesToday.Text = pagesToday.ToString();
             lbHoldReleaseJobs.Text = holdReleaseJobs.ToString();
         }
-
-
-
-
-
 
         private async void WaitForTime()
         {
@@ -168,8 +102,6 @@ namespace PrintingStatus
         {
             pictureBox1.Image = Resources.dashboard;
         }
-
-
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
@@ -279,6 +211,23 @@ namespace PrintingStatus
         private void clbPrinters_ItemCheck(object sender, ItemCheckEventArgs e)
         {
            
+        }
+
+        private void dgvPrinterStatus_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + "prices.xml"))
+                SavePrices.CreateXML();
+            int rowindex = dgvPrinterStatus.CurrentCell.RowIndex;
+            string selectedPrinter = dgvPrinterStatus.Rows[rowindex].Cells["Printer"].Value.ToString();
+
+            SavePrices.selectedPrinter = selectedPrinter;
+
+            if (!SavePrices.FindPrinter(selectedPrinter))
+                SavePrices.AppendPrinter(selectedPrinter);
+            else
+                SavePrices.LoadData(selectedPrinter);
+            ChangePrices changePricesForm = new ChangePrices();
+            changePricesForm.Show();
         }
 
         private void pictureBox2_MouseLeave(object sender, EventArgs e)

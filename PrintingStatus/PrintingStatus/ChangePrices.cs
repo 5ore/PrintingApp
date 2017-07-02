@@ -40,7 +40,6 @@ namespace PrintingStatus
         public ChangePrices()
         {
             InitializeComponent();
-            SavePrices.LoadData();
             nudBA4.Value = (decimal)SavePrices.BA4;
             nudBA3.Value = (decimal)SavePrices.BA3;
             nudCA4.Value = (decimal)SavePrices.CA4;
@@ -371,7 +370,6 @@ namespace PrintingStatus
             {
                 if (nudBA4.Enabled)
                 {
-                    SavePrices.SaveData();
                     label9.Text = "Loged as " + Admin.AdminName;
                     btnEdit.Text = "Edit";
                     nudBA3.Enabled = false;
@@ -400,6 +398,10 @@ namespace PrintingStatus
         //DUGME ZA LOGOVANJE, VALIDACIJA
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            if(Admin.AdminLoged)
+            {
+                SavePrices.SaveData(SavePrices.selectedPrinter);
+            }
             if (tbName.Text != "" && tbName.Text == Admin.AdminName)
             {
                 if (tbPass.Text != "" && tbPass.Text == Admin.AdminPass)

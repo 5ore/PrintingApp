@@ -51,7 +51,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.lbPrinters = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.btnPrices = new System.Windows.Forms.Button();
             this.tpLog = new System.Windows.Forms.TabPage();
             this.lbNoFilesFound = new System.Windows.Forms.Label();
             this.clbPrinters = new System.Windows.Forms.CheckedListBox();
@@ -72,6 +71,7 @@
             this.printLogBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.printersDataSet = new PrintingStatus.PrintersDataSet();
             this.printLogTableAdapter = new PrintingStatus.PrintersDataSetTableAdapters.PrintLogTableAdapter();
+            this.lbSelectPrice = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.tpDashboard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
@@ -116,7 +116,6 @@
             this.tpDashboard.Controls.Add(this.pictureBox1);
             this.tpDashboard.Controls.Add(this.label2);
             this.tpDashboard.Controls.Add(this.panel1);
-            this.tpDashboard.Controls.Add(this.btnPrices);
             this.tpDashboard.Location = new System.Drawing.Point(4, 22);
             this.tpDashboard.Margin = new System.Windows.Forms.Padding(0);
             this.tpDashboard.Name = "tpDashboard";
@@ -345,16 +344,6 @@
             this.label6.TabIndex = 4;
             this.label6.Text = "Printers";
             // 
-            // btnPrices
-            // 
-            this.btnPrices.Location = new System.Drawing.Point(496, 23);
-            this.btnPrices.Name = "btnPrices";
-            this.btnPrices.Size = new System.Drawing.Size(75, 23);
-            this.btnPrices.TabIndex = 2;
-            this.btnPrices.Text = "Prices";
-            this.btnPrices.UseVisualStyleBackColor = true;
-            this.btnPrices.Click += new System.EventHandler(this.btnPrices_Click);
-            // 
             // tpLog
             // 
             this.tpLog.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("tpLog.BackgroundImage")));
@@ -456,6 +445,7 @@
             // 
             this.tpPrinters.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("tpPrinters.BackgroundImage")));
             this.tpPrinters.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.tpPrinters.Controls.Add(this.lbSelectPrice);
             this.tpPrinters.Controls.Add(this.label3);
             this.tpPrinters.Controls.Add(this.dgvPrinterStatus);
             this.tpPrinters.Location = new System.Drawing.Point(4, 22);
@@ -472,7 +462,7 @@
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Calibri", 10.25F);
             this.label3.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label3.Location = new System.Drawing.Point(270, 26);
+            this.label3.Location = new System.Drawing.Point(159, 26);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(296, 41);
             this.label3.TabIndex = 1;
@@ -488,12 +478,13 @@
             this.dgvPrinterStatus.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Printer,
             this.Status});
-            this.dgvPrinterStatus.Location = new System.Drawing.Point(273, 70);
+            this.dgvPrinterStatus.Location = new System.Drawing.Point(151, 107);
             this.dgvPrinterStatus.Name = "dgvPrinterStatus";
             this.dgvPrinterStatus.ReadOnly = true;
             this.dgvPrinterStatus.RowHeadersWidth = 90;
             this.dgvPrinterStatus.Size = new System.Drawing.Size(293, 177);
             this.dgvPrinterStatus.TabIndex = 0;
+            this.dgvPrinterStatus.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPrinterStatus_CellContentClick);
             // 
             // Printer
             // 
@@ -563,6 +554,15 @@
             // 
             this.printLogTableAdapter.ClearBeforeFill = true;
             // 
+            // lbSelectPrice
+            // 
+            this.lbSelectPrice.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.lbSelectPrice.Location = new System.Drawing.Point(162, 71);
+            this.lbSelectPrice.Name = "lbSelectPrice";
+            this.lbSelectPrice.Size = new System.Drawing.Size(157, 33);
+            this.lbSelectPrice.TabIndex = 2;
+            this.lbSelectPrice.Text = "Click on any printer to view or adjust the pricing";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -616,7 +616,6 @@
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.DataGridView dataGridView3;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button btnPrices;
         private System.Windows.Forms.Label lbNoFilesFound;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label8;
@@ -641,6 +640,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Printer;
         private System.Windows.Forms.DataGridViewTextBoxColumn Status;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lbSelectPrice;
     }
 }
 
